@@ -9859,7 +9859,7 @@ a{
     font-size: 18px;     font-weight: bold;     background-color: #f1f7fd;     color: #118AEF;     margin: 0;     border-radius: 10px 10px 0 0; }
 .custom-side-nav {
     background: url(https://www.simplilearn.com/ice9/assets/home/map.jpg) no-repeat;
-    width: 250px;
+    width: 300px;
     background-color: #ffffff;     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);     position: sticky;
     top: 0;
     height: 100%;     overflow: auto;

@@ -39,7 +39,7 @@ const mostPopularCards = [
 ]
 const fullStackCards = [
     {
-        imgSrc: 'images/fullstack course.jpg',
+        imgSrc: 'images/banners-MIT_NEW_Homepage_Thumbnail_a.jpg',
         logoSrc: 'images/fullstack course.jpg',
         title: 'Advanced Full-Stack Development',
         description: 'Master the art of full-stack development with our advanced course.',
@@ -70,9 +70,7 @@ const fullStackCards = [
     }
 ];
 
-
-
-fullStackTab.addEventListener('click', function(event) {
+mostPopularTab.addEventListener('click', function(event) {
     event.preventDefault();
 
     
@@ -87,7 +85,7 @@ fullStackTab.addEventListener('click', function(event) {
     
  
     
-    fullStackCards.forEach(card => {
+    mostPopularCards.forEach(card => {
         const cardElement = `
          <a class="card " target="_blank">
                                         <div class="card-body">
@@ -109,7 +107,9 @@ fullStackTab.addEventListener('click', function(event) {
         cardList.innerHTML += cardElement;
     });
 });
-mostPopularTab.addEventListener('click', function(event) {
+
+
+fullStackTab.addEventListener('click', function(event) {
     event.preventDefault();
 
     
@@ -124,7 +124,7 @@ mostPopularTab.addEventListener('click', function(event) {
     
  
     
-    mostPopularCards.forEach(card => {
+    fullStackCards.forEach(card => {
         const cardElement = `
          <a class="card " target="_blank">
                                         <div class="card-body">
