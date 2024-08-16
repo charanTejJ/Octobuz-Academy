@@ -4232,18 +4232,6 @@ footer .footer-disc a:hover {
     background: #000
 }
 
-footer .footer-disc a:before {
-    content: "";
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    background: var(--footer-sprite) no-repeat;
-    float: left;
-    position: relative;
-    left: 12px;
-    top: 5px;
-    background-position: -18px -19px
-}
 
 footer .footer-disc a.ios-app {
     border-top: 0;
@@ -4692,7 +4680,7 @@ ul.simpli_terms li.country-address h2 {
     }
 
     .col-md-2 {
-        width: 33.333%;
+        width: 53.333%;
         float: left
     }
 
@@ -9658,7 +9646,10 @@ a{
     display: flex;
     height: 100vh; 
 }
-
+.image-resize{
+    width: 400px !important;
+    height: 400px !important;
+}
 .custom-side-nav {
     width: 20%;
     background-color: #ffffff;     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);     position: sticky;
