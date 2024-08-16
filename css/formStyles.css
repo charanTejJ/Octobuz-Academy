@@ -60,3 +60,68 @@
     background-color: #0a6fc9;
 }
 
+.animated-underline {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .animated-underline::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #118AEF; /* Bluish color */
+    transition: all 0.4s ease-out;
+  }
+  
+  .animated-underline:hover::before {
+    width: 100%;
+    left: 0;
+  }
+  
+  
+  .animated-underline {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .animated-underline::before
+  {
+    content: "";
+    position: absolute;
+    width: 0;
+
+    height: 1px; /* Thickness of the underline */
+    background-color: #118AEF; /* Bluish color */
+    transition: width 0.4s ease;
+  }
+  
+  .animated-underline::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px; /* Thickness of the underline */
+    background-color: #118AEF; /* Bluish color */
+    transition: width 0.4s ease;
+  }
+  .animated-underline::before {
+    top: 0; /* Positioning for the top line */
+    left: 50%; /* Start from the middle */
+    transform: translateX(-50%);
+  }
+  
+  .animated-underline::after {
+    bottom: 0; /* Positioning for the bottom line */
+    left: 50%; /* Start from the middle */
+    transform: translateX(-50%);
+  }
+  
+  .animated-underline:hover::before,
+  .animated-underline:hover::after {
+    width: 100%; /* Expand fully to the left and right */
+    left: 0; /* Reset the left positioning */
+    transform: none;
+  }
+  
