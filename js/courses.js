@@ -1,4 +1,3 @@
-
 const mostPopularTab = document.querySelector('.category-tab.active-tab');
 const fullStackTab = document.getElementById('full-stack');
 

@@ -1,162 +1,160 @@
-
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const events = {
         "Aditya Degree College": [
-            "https://octobuzacademy.com/Wesite%20Photos/Aditya%20Degree%20College/IMG_0115.JPG",
-            "https://octobuzacademy.com/Wesite%20Photos/Aditya%20Degree%20College/IMG_0118.JPG",
-            "https://octobuzacademy.com/Wesite%20Photos/Aditya%20Degree%20College/IMG_0140.JPG",
-            "https://octobuzacademy.com/Wesite%20Photos/Aditya%20Degree%20College/IMG_0235.JPG"
+            "images/events/11.jpg",
+            "images/events/12.jpg",
+            "images/events/13.jpg",
+            "images/events/14.jpg"
         ],
         "Narayana Career Guidance": [
-            "https://octobuzacademy.com/Wesite%20Photos/Narayana%20Career%20Guidance/IMG_0337.JPG",
-            "https://octobuzacademy.com/Wesite%20Photos/Narayana%20Career%20Guidance/IMG_0339.JPG",
-            "https://octobuzacademy.com/Wesite%20Photos/Narayana%20Career%20Guidance/IMG_0368.JPG",
-            "https://octobuzacademy.com/Wesite%20Photos/Narayana%20Career%20Guidance/IMG_0438.JPG"
+            "images/events/21.jpg",
+            "images/events/22.jpg",
+            "images/events/23.jpg",
+            "images/events/24.jpg"
         ],
         "Narayana MOU": [
-            "https://octobuzacademy.com/Wesite%20Photos/NECN%20MOU/WhatsApp%20Image%202023-01-20%20at%2010.27.11%20PM.jpeg",
-            "https://octobuzacademy.com/Wesite%20Photos/NECN%20MOU/WhatsApp%20Image%202023-01-20%20at%2010.27.13%20PM.jpeg",
-            "https://octobuzacademy.com/Wesite%20Photos/NECN%20MOU/WhatsApp%20Image%202023-01-20%20at%2010.27.15%20PM%20(1).jpeg",
-            "https://octobuzacademy.com/Wesite%20Photos/NECN%20MOU/WhatsApp%20Image%202023-01-20%20at%2010.27.15%20PM.jpeg"
+            "images/events/31.jpeg",
+            "images/events/32.jpeg",
+            "images/events/33.jpeg",
+            "images/events/34.jpeg"
         ]
     };
 
     const eventList = document.getElementById("custom-event-list");
     const carouselImages = document.querySelector(".custom-carousel-images");
+    const rightButton = document.querySelector(".custom-right-btn");
+    const leftButton = document.querySelector(".custom-left-btn");
     let currentIndex = 0;
+    let eventName = '';
+    let autoScrollInterval;
+    const autoScrollDelay = 3000; 
 
     function updateCarousel(eventImages) {
         carouselImages.innerHTML = '';
         eventImages.forEach(imageUrl => {
             const img = document.createElement("img");
             img.src = imageUrl;
+            img.loading = "eager"; 
             carouselImages.appendChild(img);
         });
-        showImage(0); // Show the first image initially
+        carouselImages.style.transition = 'transform 0.5s ease-in-out';
+        showImage(0);
     }
 
     function showImage(index) {
         const offset = -index * 100;
         carouselImages.style.transform = `translateX(${offset}%)`;
+        carouselImages.style.transition = ' 1s ease-in-out';
         currentIndex = index;
+        updateButtonVisibility();
     }
-    let event_name = '';
+
+    function updateButtonVisibility() {
+        if (carouselImages.children.length === 0) {
+            rightButton.style.visibility = "hidden";
+            leftButton.style.visibility = "hidden";
+            return;
+        }
+
+        rightButton.style.visibility = currentIndex < carouselImages.children.length - 1 ? "visible" : "hidden";
+        leftButton.style.visibility = currentIndex > 0 ? "visible" : "hidden";
+    }
+
     function handleEventClick(eventName) {
         event_name = eventName;
         updateCarousel(events[eventName]);
-        document.querySelector(".custom-right-btn").style.visibility="visible"
-        
-        // Remove 'selected' class from all list items
+        resetAutoScroll();
         document.querySelectorAll(".custom-side-nav li").forEach(li => {
             li.classList.remove("selected");
         });
-
-        // Add 'selected' class to the clicked item
         document.querySelector(`.custom-side-nav li[data-event="${eventName}"]`).classList.add("selected");
+    }
+
+    function startAutoScroll() {
+        autoScrollInterval = setInterval(() => {
+            if (currentIndex < carouselImages.children.length - 1) {
+                showImage(currentIndex + 1);
+            } else {
+                
+                const eventNames = Object.keys(events);
+                let nextEventIndex = (eventNames.indexOf(event_name) + 1) % eventNames.length;
+                handleEventClick(eventNames[nextEventIndex]);
+            }
+        }, 2000); 
+    }
+
+    function resetAutoScroll() {
+        clearInterval(autoScrollInterval);
+        startAutoScroll(); 
     }
 
     for (const [eventName, images] of Object.entries(events)) {
         const li = document.createElement("li");
         li.textContent = eventName;
-        li.setAttribute("data-event", eventName); // Store event name for identification
+        li.setAttribute("data-event", eventName);
         li.addEventListener("click", () => handleEventClick(eventName));
         eventList.appendChild(li);
     }
 
-    document.querySelector(".custom-left-btn").addEventListener("click", () => {
-        
-        if (currentIndex > 0) showImage(currentIndex - 1);
-              document.querySelector(".custom-right-btn").style.visibility="visible"
-    });
-
-    document.querySelector(".custom-right-btn").addEventListener("click", () => {
-        if (currentIndex < carouselImages.children.length - 1) showImage(currentIndex + 1);
-        if(currentIndex >= events[event_name].length-1){
-            document.querySelector(".custom-right-btn").style.visibility="hidden";
+    rightButton.addEventListener("click", () => {
+        if (currentIndex < carouselImages.children.length - 1) {
+            showImage(currentIndex + 1);
+        } else {
+            
+            const eventNames = Object.keys(events);
+            let nextEventIndex = (eventNames.indexOf(event_name) + 1) % eventNames.length;
+            handleEventClick(eventNames[nextEventIndex]);
         }
+        resetAutoScroll(); 
     });
 
-    // Initialize with the first event
+    leftButton.addEventListener("click", () => {
+        if (currentIndex > 0) {
+            showImage(currentIndex - 1);
+        } else {
+            
+            const eventNames = Object.keys(events);
+            let prevEventIndex = (eventNames.indexOf(event_name) - 1 + eventNames.length) % eventNames.length;
+            handleEventClick(eventNames[prevEventIndex]);
+        }
+        resetAutoScroll(); 
+    });
+
+    
     handleEventClick(Object.keys(events)[0]);
 });
 
-
-
-// Define card data for each category
-const cardData = {
-    'most-popular': [
-        {
-            title: "CyberSecurity",
-            imgSrc: "images/cyber-security-training.png",
-            logoSrc: "images/cyber-security-training.png",
-            description: "Secure digital realms. Master cybersecurity in a comprehensive, proactive course."
-        },
-        {
-            title: "PowerBI",
-            imgSrc: "images/powerbi.png",
-            logoSrc: "images/powerbi.png",
-            description: "Unleash insights. Transform data with Power BI's compelling visual storytelling."
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+           setTimeout(()=> startAutoScroll(),500)
+        } else {
+            clearInterval(autoScrollInterval); 
         }
-    ],
-    'newest': [
-        {
-            title: "Full-Stack Development",
-            imgSrc: "images/fullstack course.jpg",
-            logoSrc: "images/fullstack course.jpg",
-            description: "Craft complete solutions. Join the journey to skilled full-stack development."
-        },
-        {
-            title: "Front-End Development",
-            imgSrc: "images/frontendcourse.jpg",
-            logoSrc: "images/frontendcourse.jpg",
-            description: "Frontend mastery: Design, code, create. Elevate skills with transformative course."
-        }
-    ]
-};
-
-// Handle navigation clicks
-document.querySelectorAll('.category-tab').forEach(tab => {
-    tab.addEventListener('click', function(event) {
-        event.preventDefault();
-
-        // Remove active class from all tabs
-        document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active-tab'));
-
-        // Add active class to clicked tab
-        tab.classList.add('active-tab');
-
-        // Get the category from the clicked tab
-        const category = tab.querySelector('a').getAttribute('href').substring(1);
-
-        // Get the corresponding card data
-        const selectedCards = cardData[category];
-
-        // Get the card container
-        const cardList = document.querySelector('.card-list-dk');
-
-        // Clear existing cards
-        cardList.innerHTML = '';
-
-        // Add new cards to the container
-        selectedCards.forEach(card => {
-            cardList.innerHTML += `
-                <a class="card" target="_blank">
-                    <div class="card-body">
-                        <div class="card-banner">
-                            <img class="program-img" src="${card.imgSrc}" alt="${card.title}">
-                        </div>
-                        <div class="card-info">
-                            <div class="card-logo">
-                                <img class="program-logo" width="16" height="9" src="${card.logoSrc}" alt="${card.title}">
-                            </div>
-                            <h2>${card.title}</h2>
-                            <div class="card-list">
-                                <p>${card.description}</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            `;
-        });
     });
+}, {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1 
 });
+
+observer.observe(document.querySelector(".custom-carousel-wrapper"));
+
+
+function startAutoScroll() {
+    autoScrollInterval = setInterval(() => {
+        if (currentIndex < carouselImages.children.length - 1) {
+            showImage(currentIndex + 1);
+        } else {
+            
+            const eventNames = Object.keys(events);
+            let nextEventIndex = (eventNames.indexOf(event_name) + 1) % eventNames.length;
+            handleEventClick(eventNames[nextEventIndex]);
+        }
+    }, 2000); 
+}
+
+function resetAutoScroll() {
+    clearInterval(autoScrollInterval);
+    startAutoScroll(); 
+}

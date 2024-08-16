@@ -9656,7 +9656,8 @@ a{
 .custom-carousel-wrapper {
     background: url(https://www.simplilearn.com/ice9/assets/home/map.jpg) no-repeat;
     display: flex;
-    height: 100vh; }
+    height: 100vh; 
+}
 
 .custom-side-nav {
     width: 20%;

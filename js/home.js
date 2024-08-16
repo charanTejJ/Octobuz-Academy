@@ -1,21 +1,18 @@
 
 document.querySelectorAll('.category-tab a').forEach(function(tab) {
   tab.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevent the default anchor behavior
-      // Add your custom click handling code here
+      event.preventDefault();
       console.log(`Clicked on: ${this.textContent}`);
   });
 });
 document.querySelectorAll('.category-tab').forEach(function(tab) {
   tab.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevent the default anchor behavior
+      event.preventDefault(); 
 
-      // Remove .active-tab from all tabs
       document.querySelectorAll('.category-tab').forEach(function(item) {
           item.classList.remove('active-tab');
       });
 
-      // Add .active-tab to the clicked tab
       this.classList.add('active-tab');
   });
 });
