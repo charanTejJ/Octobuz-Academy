@@ -160,3 +160,25 @@ mostPopularTab.addEventListener('click', function(event) {
 });
 
 mostPopularTab.click();
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const partnerContainer = document.querySelector('.partners-info.partner-desk .part-card');
+  
+    let scrollSpeed = 4; 
+  
+    
+    const partnerClone = partnerContainer.innerHTML;
+    partnerContainer.innerHTML += partnerClone;
+  
+    function scrollPartners() {
+      partnerContainer.scrollLeft += scrollSpeed;
+      if (partnerContainer.scrollLeft >= partnerContainer.scrollWidth / 2) {
+        partnerContainer.scrollLeft = 0;
+      }
+      requestAnimationFrame(scrollPartners);
+    }
+  
+    scrollPartners();
+  });
+  
