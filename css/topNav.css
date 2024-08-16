@@ -102,7 +102,7 @@ a {
     background-position: 100% 0;
   }
   to {
-    background-position: 0% 0;
+    background-position: -100% 0;
   }
 }
 
