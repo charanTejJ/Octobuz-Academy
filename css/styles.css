@@ -28,7 +28,7 @@ display: grid;
 
 @font-face {
     font-family: 'prof-font';
-    src: url('oregon-ldo-font/OregonLdo-d9q7.ttf');
+    src: url('font/OregonLdo-d9q7.ttf');
 }
 
 :root {
