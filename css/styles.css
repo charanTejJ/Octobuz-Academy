@@ -26,7 +26,10 @@ display: grid;
 }
 
 
-
+@font-face {
+    font-family: 'prof-font';
+    src: url('oregon-ldo-font/OregonLdo-d9q7.ttf');
+}
 
 :root {
     --sub-course-sprite: url('https://www.simplilearn.com/ice9/assets/course_sprite_7.svgz');

@@ -139,10 +139,10 @@ a {
   align-items: center;
   justify-content: center;
   min-height: 10vh;
-  color: #f0eff4  ;
+  color: #faa61a;
   font-size: 50px;
   font-weight: bold;
-  font-family: "Grey Qo";
+  font-family: "prof-font";
   letter-spacing: 7px;
   cursor: pointer;
 }
@@ -160,7 +160,7 @@ a {
 .title-style:hover span {
   color: #1179ef;
 
-  text-shadow: 0 0 10px #c5c9d7, 0 0 20px #9ea682, 0 0 40px #cae9ae;
+  text-shadow: 0 0 10px #c5c9d7, 0 0 20px #9ea682, 0 0 20px #cae9ae;
 }
 
 
@@ -232,7 +232,7 @@ a {
   width: 50%;
   height: 1px;
   background: #118AEF;
-  opacity: 0.3; /* Adjust for faded effect */
+  opacity: 0.3;
 }
 
 .text-container::before {
@@ -249,6 +249,6 @@ a {
 
 .text-container span {
   display: inline-block;
-  padding: 0 10px; /* Adjust padding to position text */
-  background: #fff; /* Matches background to make text stand out */
+  padding: 0 10px;
+  background: #fff;
 }
